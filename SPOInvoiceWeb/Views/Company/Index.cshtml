@@ -1,0 +1,24 @@
+﻿@model SPOInvoiceWeb.ViewModels.CompanyListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ActionLink("Create new","Create")
+<h2>List of companies</h2>
+<table class="table">
+    <tr>
+        <th>Orgno</th>
+        <th>Namn</th>
+        <th></th>
+    </tr>
+    @foreach(var company in Model.Companies)
+    {
+        <tr>
+            <td>@company.OrgNo</td>
+            <td>@company.Name</td>
+            <td>@Html.ActionLink("Edit company","Edit",new { Id = company.Id })</td>
+        </tr>
+    }
+</table>
+
