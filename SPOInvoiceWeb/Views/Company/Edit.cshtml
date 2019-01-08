@@ -1,0 +1,82 @@
+﻿@model SPOInvoiceWeb.ViewModels.CompanyEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+<table class="table">
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>Namn</td>
+        <td>
+            @Html.HiddenFor(model => model.id)
+            @Html.TextBoxFor(model => model.name)
+
+            @Html.ValidationMessageFor(model => model.name)
+        </td>
+    </tr>
+    <tr>
+        <td>Orgnr</td>
+        <td>
+            @Html.TextBoxFor(p => p.OrgNo)
+            @Html.ValidationMessageFor(p => p.OrgNo)
+        </td>
+    </tr>
+    <tr>
+        <td>Faktura namn</td>
+        <td>
+            @Html.TextBoxFor(p => p.InvoiceName)
+            @Html.ValidationMessageFor(p => p.InvoiceName)
+        </td>
+    </tr>
+    <tr>
+        <td>Invoice Address</td>
+        <td>
+            @Html.TextBoxFor(p => p.InvoiceAddress)
+            @Html.ValidationMessageFor(p => p.InvoiceAddress)
+        </td>
+    </tr>
+    <tr>
+        <td>Invoice Postno</td>
+        <td>
+            @Html.TextBoxFor(p => p.InvoicePostNo)
+            @Html.ValidationMessageFor(p => p.InvoicePostNo)
+        </td>
+    </tr>
+
+    <tr>
+        <td>Invoice PostAddress</td>
+        <td>
+            @Html.TextBoxFor(p => p.InvoicePostAddress)
+            @Html.ValidationMessageFor(p => p.InvoicePostAddress)
+        </td>
+    </tr>
+
+    <tr>
+        <td>Betalningsvillkor faktura</td>
+        <td>
+            @Html.TextBoxFor(p => p.InvoiceDefaultPaymentTermsDays)
+            @Html.ValidationMessageFor(p => p.InvoiceDefaultPaymentTermsDays)
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>Founded</td>
+        <td>
+            @Html.TextBoxFor(p => p.Founded)
+            @Html.ValidationMessageFor(p => p.Founded)
+        </td>
+    </tr>
+
+
+</table>
+    <input type="submit" value="Spara" />
+
+}
