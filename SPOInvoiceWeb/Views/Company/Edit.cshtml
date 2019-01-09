@@ -59,6 +59,14 @@
     </tr>
 
     <tr>
+        <td>Invoice email</td>
+        <td>
+            @Html.TextBoxFor(p => p.InvoiceEmail)
+            @Html.ValidationMessageFor(p => p.InvoiceEmail)
+        </td>
+    </tr>
+
+    <tr>
         <td>Betalningsvillkor faktura</td>
         <td>
             @Html.TextBoxFor(p => p.InvoiceDefaultPaymentTermsDays)
@@ -70,7 +78,7 @@
     <tr>
         <td>Founded</td>
         <td>
-            @Html.TextBoxFor(p => p.Founded)
+            @Html.EditorFor(p => p.Founded)
             @Html.ValidationMessageFor(p => p.Founded)
         </td>
     </tr>
