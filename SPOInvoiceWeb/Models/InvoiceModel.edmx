@@ -46,13 +46,6 @@
           <Property Name="OrgNo" Type="nvarchar" MaxLength="15" />
           <Property Name="YourVatNo" Type="nvarchar" MaxLength="25" />
         </EntityType>
-        <EntityType Name="NyaTabellen">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="namn" Type="nvarchar" MaxLength="10" />
-        </EntityType>
         <Association Name="FK_Invoice_Invoice">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
@@ -68,7 +61,6 @@
         <EntityContainer Name="SPOInvoiceModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NyaTabellen" EntityType="Self.NyaTabellen" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Invoice_Invoice" Association="Self.FK_Invoice_Invoice">
             <End Role="Company" EntitySet="Company" />
             <End Role="Invoice" EntitySet="Invoice" />
@@ -140,15 +132,7 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
-          <EntitySet Name="NyaTabellen" EntityType="SPOInvoiceModel.NyaTabellen" />
         </EntityContainer>
-        <EntityType Name="NyaTabellen">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="namn" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,14 +179,6 @@
                 <ScalarProperty Name="InvoiceEmail" ColumnName="InvoiceEmail" />
                 <ScalarProperty Name="OrgNo" ColumnName="OrgNo" />
                 <ScalarProperty Name="YourVatNo" ColumnName="YourVatNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NyaTabellen">
-            <EntityTypeMapping TypeName="SPOInvoiceModel.NyaTabellen">
-              <MappingFragment StoreEntitySet="NyaTabellen">
-                <ScalarProperty Name="namn" ColumnName="namn" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

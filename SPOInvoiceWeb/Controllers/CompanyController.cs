@@ -30,7 +30,54 @@ namespace SPOInvoiceWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Create()
+        {
+            return View(new ViewModels.CompanyEditViewModel());
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            using (var entities = new SPOInvoiceEntities())
+            {
+                var obj = entities.Company.FirstOrDefault(x => x.id == id);
+                entities.Company.RemoveRange(new[] { obj  });
+                entities.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Create(ViewModels.CompanyEditViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            using (var entities = new SPOInvoiceEntities())
+            {
+                var model = new Models.Company();
+
+                model.InvoiceAddress = viewModel.InvoiceAddress;
+                model.InvoiceDefaultPaymentTermsDays = viewModel.InvoiceDefaultPaymentTermsDays;
+                model.InvoiceEmail = viewModel.InvoiceEmail;
+                model.InvoiceName = viewModel.InvoiceName;
+                model.InvoicePostAddress = viewModel.InvoicePostAddress;
+                model.InvoicePostNo = viewModel.InvoicePostNo;
+                model.name = viewModel.name;
+                model.OrgNo = viewModel.OrgNo;
+                model.Founded = viewModel.Founded;
+
+                entities.Company.Add(model);
+                entities.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+        }
+
+
+
+        protected ViewModels.CompanyEditViewModel GetCompanyFromDatabaseAndConvertToViewModel(int id)
         {
             using (var entities = new SPOInvoiceEntities())
             {
@@ -38,7 +85,7 @@ namespace SPOInvoiceWeb.Controllers
                 var viewModel = new ViewModels.CompanyEditViewModel();
                 viewModel.id = model.id;
                 viewModel.InvoiceAddress = model.InvoiceAddress;
-                viewModel.InvoiceDefaultPaymentTermsDays = 
+                viewModel.InvoiceDefaultPaymentTermsDays =
                     model.InvoiceDefaultPaymentTermsDays.HasValue ? model.InvoiceDefaultPaymentTermsDays.Value
                     : 30;
                 viewModel.InvoiceEmail = model.InvoiceEmail;
@@ -48,9 +95,17 @@ namespace SPOInvoiceWeb.Controllers
                 viewModel.name = model.name;
                 viewModel.OrgNo = model.OrgNo;
                 viewModel.Founded = model.Founded.HasValue ? model.Founded.Value : DateTime.Now;
-                return View(viewModel);
+
+                return viewModel;
             }
 
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var viewModel = GetCompanyFromDatabaseAndConvertToViewModel(id);
+            return View(viewModel);
         }
 
 

@@ -27,6 +27,5 @@ namespace SPOInvoiceWeb.Models
     
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
-        public virtual DbSet<NyaTabellen> NyaTabellen { get; set; }
     }
 }

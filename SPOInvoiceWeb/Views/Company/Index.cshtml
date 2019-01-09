@@ -14,11 +14,21 @@
     </tr>
     @foreach(var company in Model.Companies)
     {
-        <tr>
-            <td>@company.OrgNo</td>
-            <td>@company.Name</td>
-            <td>@Html.ActionLink("Edit company","Edit",new { Id = company.Id })</td>
-        </tr>
+    <tr>
+        <td>@company.OrgNo</td>
+        <td>@company.Name</td>
+        <td>@Html.ActionLink("Edit company", "Edit", new { Id = company.Id })</td>
+        <td>
+            @Html.ActionLink(
+            "Delete company",
+            "Delete",
+            new { id = company.Id },
+            new { onclick = "return confirm('Are you sure you wish to delete this company?');",
+            style = "font-weight: bold"
+            })
+            </td>
+        
+    </tr>
     }
 </table>
 

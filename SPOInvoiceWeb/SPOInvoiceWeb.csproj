@@ -160,9 +160,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\NyaTabellen.cs">
-      <DependentUpon>InvoiceModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CompanyEditViewModel.cs" />
     <Compile Include="ViewModels\CompanyListViewModel.cs" />
@@ -222,6 +219,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
