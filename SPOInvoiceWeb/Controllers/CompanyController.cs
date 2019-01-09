@@ -69,10 +69,13 @@ namespace SPOInvoiceWeb.Controllers
 
                 entities.Company.Add(model);
 
-                var invoice = new Models.Invoice();
-                invoice.Datum = DateTime.Now;
-                invoice.InvoiceAddress = model.InvoiceAddress;
-                invoice.Company = model;
+                // EF FIXAR RELATIONER!!! 
+                //GENOM PROPERTY
+                //var invoice = new Models.Invoice();
+                //invoice.Datum = DateTime.Now;
+                //invoice.InvoiceAddress = model.InvoiceAddress;
+                //invoice.Company = model;
+                //entities.Invoice.Add(invoice);
                 
 
 
