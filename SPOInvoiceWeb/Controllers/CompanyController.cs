@@ -57,7 +57,6 @@ namespace SPOInvoiceWeb.Controllers
             using (var entities = new SPOInvoiceEntities())
             {
                 var model = new Models.Company();
-
                 model.InvoiceAddress = viewModel.InvoiceAddress;
                 model.InvoiceDefaultPaymentTermsDays = viewModel.InvoiceDefaultPaymentTermsDays;
                 model.InvoiceEmail = viewModel.InvoiceEmail;
@@ -69,7 +68,23 @@ namespace SPOInvoiceWeb.Controllers
                 model.Founded = viewModel.Founded;
 
                 entities.Company.Add(model);
+
+                var invoice = new Models.Invoice();
+                invoice.Datum = DateTime.Now;
+                invoice.InvoiceAddress = model.InvoiceAddress;
+                invoice.Company = model;
+                
+
+
+                var changeLog = new Models.ChangeLog();
+                changeLog.datum = DateTime.Now;
+                changeLog.description = "A new Company  was created";
+                entities.ChangeLog.Add(changeLog);
+
                 entities.SaveChanges();
+
+
+
                 return RedirectToAction("Index");
             }
 
@@ -130,6 +145,11 @@ namespace SPOInvoiceWeb.Controllers
                 model.name = viewModel.name;
                 model.OrgNo = viewModel.OrgNo;
                 model.Founded = viewModel.Founded;
+
+                var changeLog = new Models.ChangeLog();
+                changeLog.datum = DateTime.Now;
+                changeLog.description = "Company with id " + viewModel.id + " was edited";
+                entities.ChangeLog.Add(changeLog);
 
                 entities.SaveChanges();
                 return RedirectToAction("Index");

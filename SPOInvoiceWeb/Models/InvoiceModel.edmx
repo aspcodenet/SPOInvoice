@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SPOInvoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datum" Type="datetime" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="id" />
@@ -59,6 +67,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SPOInvoiceModelStoreContainer">
+          <EntitySet Name="ChangeLog" EntityType="Self.ChangeLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Invoice_Invoice" Association="Self.FK_Invoice_Invoice">
@@ -132,7 +141,16 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
+          <EntitySet Name="ChangeLog" EntityType="SPOInvoiceModel.ChangeLog" />
         </EntityContainer>
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datum" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -179,6 +197,15 @@
                 <ScalarProperty Name="InvoiceEmail" ColumnName="InvoiceEmail" />
                 <ScalarProperty Name="OrgNo" ColumnName="OrgNo" />
                 <ScalarProperty Name="YourVatNo" ColumnName="YourVatNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeLog">
+            <EntityTypeMapping TypeName="SPOInvoiceModel.ChangeLog">
+              <MappingFragment StoreEntitySet="ChangeLog">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
